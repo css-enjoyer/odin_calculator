@@ -35,4 +35,20 @@ function operate(operator, numA, numB) {
     console.log(value);
 }
 
-operate(add, 10, 2);
+const operators = document.querySelectorAll(".operator");
+const numbers = document.querySelectorAll(".num");
+const display = document.querySelector("#display");
+
+console.log(numbers);
+
+numbers.forEach((button) => {
+    button.addEventListener("click", () => {
+        display.textContent += button.textContent;
+    });
+});
+
+operators.forEach((button) => {
+    button.addEventListener("click", () => {
+        display.textContent += button.textContent;
+    });
+});
