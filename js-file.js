@@ -3,7 +3,7 @@ function add(...args) {
         total += num;
         return total;
     });
-    console.log(value);
+    return value;
 }
 
 function subtract(...args) {
@@ -11,7 +11,7 @@ function subtract(...args) {
         total -= num;
         return total;
     });
-    console.log(value);
+    return value;
 }
 
 function multiply(...args) {
@@ -19,7 +19,7 @@ function multiply(...args) {
         total *= num;
         return total;
     });
-    console.log(value);
+    return value;
 }
 
 function divide(...args) {
@@ -27,5 +27,12 @@ function divide(...args) {
         total /= num;
         return total;
     });
+    return value;
+}
+
+function operate(operator, numA, numB) {
+    let value = operator(numA, numB);
     console.log(value);
 }
+
+operate(add, 10, 2);
