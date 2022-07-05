@@ -30,25 +30,58 @@ function divide(...args) {
     return value;
 }
 
-function operate(operator, numA, numB) {
-    let value = operator(numA, numB);
+function operate(operator, ...args) {
+    let value = operator(...args);
     console.log(value);
+    return value;
 }
 
-const operators = document.querySelectorAll(".operator");
-const numbers = document.querySelectorAll(".num");
+// const operators = document.querySelectorAll(".operator");
+// const numbers = document.querySelectorAll(".num");
+const buttons = document.querySelectorAll("button");
 const display = document.querySelector("#display");
 
-console.log(numbers);
-
-numbers.forEach((button) => {
+let numA = "";
+let numB = "";
+let operator = "";
+buttons.forEach((button) => {
     button.addEventListener("click", () => {
-        display.textContent += button.textContent;
-    });
-});
-
-operators.forEach((button) => {
-    button.addEventListener("click", () => {
-        display.textContent += button.textContent;
+        if(button.classList.contains("num") && operator === "") {
+            numA += button.textContent;
+            console.log("numA: " + numA);
+        } else if(button.classList.contains("num") && operator !== "") {
+            numB += button.textContent;
+            console.log("numB: " + numB);
+        }
+        if(button.classList.contains("operator")) {
+            operator += button.id;
+            console.log("operator: " + operator);
+        }
+        if(button.id === "equals") {
+            if(operator == "add") {
+                display.textContent = operate(add, +numA, +numB);
+            }
+            if(operator == "subtract") {
+                display.textContent = operate(subtract, +numA, +numB);
+            }
+            if(operator == "multiply") {
+                display.textContent = operate(multiply, +numA, +numB);
+            }
+            if(operator == "divide") {
+                display.textContent = operate(divide, +numA, +numB);
+            }
+            numA = "";
+            numB = "";
+            operator = "";
+        }
+        if(button.id === "clear") {
+            display.textContent = "";
+            numA = "";
+            numB = "";
+            operator = "";
+        }
+        if(button.id !== "equals" && button.id !== "clear") {
+            display.textContent += button.textContent;
+        }
     });
 });
