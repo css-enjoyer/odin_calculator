@@ -36,6 +36,8 @@ body {
     justify-content: flex-end;
     align-items: flex-end;
     padding: 20px;
+    font-size: 2em;
+    overflow:hidden;
 }
 
 #buttons {
