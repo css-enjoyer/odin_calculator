@@ -32,61 +32,75 @@ function divide(...args) {
 
 function operate(operator, ...args) {
     let value = operator(...args);
+    console.log(value);
     return value;
 }
 
-// const operators = document.querySelectorAll(".operator");
-// const numbers = document.querySelectorAll(".num");
+const operators = document.querySelectorAll(".operator");
+const numbers = document.querySelectorAll(".num");
+const equal = document.querySelector("#equals");
 const buttons = document.querySelectorAll("button");
 const display = document.querySelector("#display");
-let text = "";
 let numA = "";
 let numB = "";
-let operation = "";
+let currentOperator = "";
+
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
-        if(button.id != "equals") {
-            text += button.textContent;
-            display.textContent = text;
+        if(button.textContent !== "=") {
+            display.textContent += button.textContent;
         }
-
-        if(button.id == "equals") {
-            for(let i = 0; i < text.length; i++) {
-                if(isOp(text.charAt(i)) != null) {
-                    operation = isOp(text.charAt(i))
-                } else if(operation == "") {
-                    numA += text.charAt(i);
-                } else if(numA != "") {
-                    numB += text.charAt(i);
-                }
-            }
-            text = operate(operation, +numA, +numB);
-            display.textContent = text;
-            console.log("numA: " + numA);
-            console.log("numB: " + numB);
-            console.log("ope: " + operation);
-        }
-
-        if(button.id == "clear") {
-            text = "";
+        if(button.textContent == "C") {
+            display.textContent = "";
             numA = "";
             numB = "";
-            operation = "";
-            display.textContent = text;
+            currentOperator = "";
+        }
+    });
+});
+numbers.forEach((button) => {
+    button.addEventListener("click", () => {
+        if(currentOperator == "") {
+            numA += button.textContent;
+            console.log(numA);
+        } else if(currentOperator != "") {
+            numB += button.textContent;
+            console.log(numB);
+
         }
     });
 });
 
-function isOp(text) {
-    if(text == "+") {
-        return add;
-    } else if(text == "-") {
-        return subtract;
-    } else if(text == "*") {
-        return multiply;
-    } else if(text == ".") {
-        return divide;
-    } else {
-        return null;
+operators.forEach((button) => {
+    button.addEventListener("click", () => {
+        if(numA !== "" && numB !== "" && currentOperator !== "") {
+            numA = operate(isOperator(currentOperator), +numA, +numB);
+            numB = "";
+            display.textContent = "=" + numA + button.textContent;
+        }
+        currentOperator = button.textContent;
+        console.log(currentOperator);
+    });
+});
+
+equal.addEventListener("click", () => {
+    if(numA !== "" && numB !== "" && currentOperator !== "") {
+        numA = operate(isOperator(currentOperator), +numA, +numB);
+        numB = "";
+        currentOperator = "";
+        display.textContent = "=" + numA;
     }
+});
+
+function isOperator(char) {
+    if(char == "+") {
+        return add;
+    } else if (char == "-") {
+        return subtract;
+    } else if (char == "*") {
+        return multiply;
+    } else if (char == "/") {
+        return divide;
+    } 
 }
+
