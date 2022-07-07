@@ -42,16 +42,19 @@ const equal = document.querySelector("#equals");
 const buttons = document.querySelectorAll("button");
 const display = document.querySelector("#display");
 const decimal = document.querySelector("#decimal");
+const backspace = document.querySelector("#backspace");
+
 let numA = "";
 let numB = "";
 let currentOperator = "";
 
-// Extra features
+// Project +Points.
 // - Decimal: Done.
-// - Backspace
-//      - Change operation functionality
-// - Exponents
+// - Backspace: Done.
+//      - Automatic change of operation: Done.
 // - Keyboard Compatibility
+// Project Extra Extra Features
+// - Exponents
 // - Negation
 
 buttons.forEach((button) => {
@@ -64,6 +67,17 @@ buttons.forEach((button) => {
             numA = "";
             numB = "";
             currentOperator = "";
+        }
+        if(button.textContent == "⌫") {
+            let temp = display.textContent;
+            display.textContent = temp.slice(0, temp.length-1);
+            if(numB != "") {
+                numB = numB.slice(0, numB.length-1);
+            } else if(currentOperator != "") {
+                currentOperator = "";
+            } else if(numA != "") {
+                numA = numA.slice(0, numA.length-1);
+            }  
         }
     });
 });
@@ -91,6 +105,10 @@ numbers.forEach((button) => {
 });
 operators.forEach((button) => {
     button.addEventListener("click", () => {
+        if(numA !== "" && numB === "" && currentOperator !== "") {
+            let temp = display.textContent;
+            display.textContent = temp.slice(0, temp.length-2) + button.textContent;
+        }
         if(numA !== "" && numB !== "" && currentOperator !== "") {
             numA = operate(isOperator(currentOperator), +numA, +numB);
             numB = "";
