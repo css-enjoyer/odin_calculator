@@ -24,9 +24,14 @@ body {
     font-size: 2.5em;
 }
 
+#footer {
+    color: white;
+    font-family: "Quicksand", sans-serif;
+}
+
 #content {
-    width: 330px;
-    height: 550px;
+    width: 300px;
+    height: 510px;
     box-shadow: 0 0 15px;
     border-radius: 10px;
 }
@@ -57,7 +62,7 @@ button {
     border: 1px solid rgba(189, 189, 189, 0.1);
     height: 20%;
     width: 25%;
-    font-size: 2em;
+    font-size: 1.6em;
     transition: background-color 0.5s, transform 0.1s, filter 0s, border 0s;
     transition-timing-function: ease-out;
 }
