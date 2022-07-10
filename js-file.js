@@ -127,8 +127,13 @@ equal.addEventListener("click", () => {
         currentOperator = "";
         display.textContent = "=" + numA;
     }
+    if(display.textContent == "=Infinity") {
+        numA = "";
+        display.textContent = "Really..";
+    } else if (display.textContent == "=69") {
+        display.textContent += " lol..";
+    }
 });
-
 
 function isOperator(char) {
     if(char == "+") {
