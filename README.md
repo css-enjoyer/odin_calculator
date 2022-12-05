@@ -2,7 +2,7 @@
 ## Project: Calculator
 This is a webpage calculator created using HTML, CSS and JavaScript as a part of The Odin Project curriculum.
 
-See the [live preview](https://isaac-was-here.github.io/odin_calculator/) of my project!
+See the [live preview](https://css-enjoyer.github.io/odin_calculator/) of my project!
 
 ### Overview
 #### Features:
